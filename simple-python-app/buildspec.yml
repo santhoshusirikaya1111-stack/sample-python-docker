@@ -23,8 +23,8 @@ phases:
       - echo "Logging in to Amazon ECR..."
       - echo "$ECR_PASSWORD" | docker login -u "$ECR_USERNAME" --password-stdin "$ECR_REGISTRY"
       - echo "Building Docker image..."
-      - docker build -t "$ECR_REGISTRY/$ECR_USERNAME/simple-python-flask-app:latest" .
-      - docker push "$ECR_REGISTRY/$ECR_USERNAME/simple-python-flask-app:latest"
+      - docker build -t "$ECR_REGISTRY/simple-python-flask-app:latest" .
+      - docker push "$ECR_REGISTRY/simple-python-flask-app:latest"
   post_build:
     commands:
       - echo "Build completed successfully!"
