@@ -12,12 +12,10 @@ phases:
   pre_build:
     commands:
       - echo "Checking project files location"
-      - pwd
-      - ls -la
-      - ls -la sample-python-docker/simple-python-app/
-      - cd sample-python-docker/simple-python-app/
+      - echo "Listing files"
+      - ls -la simple-python-app/
       - echo "Installing dependencies..."
-      - pip install -r requirements.txt
+      - pip install -r simple-python-app/requirements.txt
   build:
     commands:
       - echo "Running tests..."
