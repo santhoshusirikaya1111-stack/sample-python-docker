@@ -11,8 +11,13 @@ phases:
       python: 3.11
   pre_build:
     commands:
+      - echo "Checking project files location"
+      - pwd
+      - ls -la
+      - ls -la sample-python-docker/simple-python-app/
+      - cd sample-python-docker/simple-python-app/
       - echo "Installing dependencies..."
-      - pip install -r sample-python-docker/simple-python-app/requirements.txt
+      - pip install -r requirements.txt
   build:
     commands:
       - echo "Running tests..."
