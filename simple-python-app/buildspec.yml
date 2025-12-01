@@ -20,7 +20,7 @@ phases:
     commands:
       - echo "Building Docker image..."
       - docker build -t $ECR_REGISTRY/simple-python-flask-app:latest simple-python-app/
-      - docker push $ECR_REGISTRY
+      - docker push $ECR_REGISTRY/simple-python-flask-app:latest
 
   post_build:
     commands:
