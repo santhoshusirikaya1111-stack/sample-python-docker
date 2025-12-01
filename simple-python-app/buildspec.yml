@@ -13,6 +13,8 @@ phases:
     commands:
       - echo "Logging in to Amazon ECR..."
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
+      # Optional Docker Hub login to avoid rate limit, replace with your Docker Hub creds stored in Secrets Manager
+      # - docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASSWORD
       - echo "Installing dependencies..."
       - pip install -r simple-python-app/requirements.txt
 
@@ -20,6 +22,7 @@ phases:
     commands:
       - echo "Building Docker image..."
       - docker build -t $ECR_REGISTRY/simple-python-flask-app:latest simple-python-app/
+      - echo "Pushing Docker image..."
       - docker push $ECR_REGISTRY/simple-python-flask-app:latest
 
   post_build:
@@ -30,6 +33,3 @@ artifacts:
   files:
     - '**/*'
   base-directory: simple-python-app
-
-
-
