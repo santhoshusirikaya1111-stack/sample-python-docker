@@ -12,7 +12,7 @@ phases:
   pre_build:
     commands:
       - echo "Logging in to Amazon ECR..."
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 390403868274.dkr.ecr.us-east-1.amazonaws.com/hello-repository
       # Optional Docker Hub login to avoid rate limit, replace with your Docker Hub creds stored in Secrets Manager
       # - docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASSWORD
       - echo "Installing dependencies..."
@@ -21,9 +21,12 @@ phases:
   build:
     commands:
       - echo "Building Docker image..."
-      - docker build -t $ECR_REGISTRY/simple-python-flask-app:latest simple-python-app/
+      - docker build -t simple-python-flask-app simple-python-app/
+      # - docker build -t $ECR_REGISTRY/simple-python-flask-app:latest simple-python-app/
+      # - docker tag hello-world 390403868274.dkr.ecr.us-east-1.amazonaws.com/hello-repository
+      - docker tag simple-python-flask-app 390403868274.dkr.ecr.us-east-1.amazonaws.com/hello-repository
       - echo "Pushing Docker image..."
-      - docker push $ECR_REGISTRY/simple-python-flask-app:latest
+      - docker push 390403868274.dkr.ecr.us-east-1.amazonaws.com/hello-repository
 
   post_build:
     commands:
